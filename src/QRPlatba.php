@@ -40,6 +40,8 @@ class QRPlatba
 
 	public const Version = '1.0';
 
+	public const DefaultSize = 150;
+
 	protected Format $format;
 
 	protected Convert $convert;
@@ -81,47 +83,29 @@ class QRPlatba
 
 	public function __construct()
 	{
-		$this->format = Format::Any();
-		$this->convert = Convert::Urlencode();
+		$this->format = Format::Alphanumeric();
+		$this->convert = Convert::Alphanumeric();
 		$this->truncate = Truncate::Yes();
 
-		$this->ibanBic = new IbanBic();
-		$this->ibanBicAlts = new IbanBicAlts();
-		$this->amount = new Amount();
-		$this->currency = new Currency();
-		$this->payeeIdentifier = new PayeeIdentifier();
-		$this->payeeName = new PayeeName();
-		$this->dueDate = new DueDate();
-		$this->paymentType = new PaymentType();
-		$this->message = new Message();
-		$this->notificationMethod = new NotificationMethod();
-		$this->notificationId = new NotificationId();
-
-		$this->repeatPayment = new RepeatPayment();
-		$this->variableSymbol = new VariableSymbol();
-		$this->specificSymbol = new SpecificSymbol();
-		$this->constantSymbol = new ConstantSymbol();
-		$this->payerIdentifier = new PayerIdentifier();
-		$this->url = new Url();
-
 		$this->properties = [
-			$this->ibanBic,
-			$this->ibanBicAlts,
-			$this->amount,
-			$this->currency,
-			$this->payeeIdentifier,
-			$this->payeeName,
-			$this->dueDate,
-			$this->paymentType,
-			$this->message,
-			$this->notificationMethod,
-			$this->notificationId,
-			$this->repeatPayment,
-			$this->variableSymbol,
-			$this->specificSymbol,
-			$this->constantSymbol,
-			$this->payerIdentifier,
-			$this->url
+			$this->ibanBic = new IbanBic(),
+			$this->ibanBicAlts = new IbanBicAlts(),
+			$this->amount = new Amount(),
+			$this->currency = new Currency(),
+			$this->payeeIdentifier = new PayeeIdentifier(),
+			$this->payeeName = new PayeeName(),
+			$this->dueDate = new DueDate(),
+			$this->paymentType = new PaymentType(),
+			$this->message = new Message(),
+			$this->notificationMethod = new NotificationMethod(),
+			$this->notificationId = new NotificationId(),
+
+			$this->repeatPayment = new RepeatPayment(),
+			$this->variableSymbol = new VariableSymbol(),
+			$this->specificSymbol = new SpecificSymbol(),
+			$this->constantSymbol = new ConstantSymbol(),
+			$this->payerIdentifier = new PayerIdentifier(),
+			$this->url = new Url(),
 		];
 	}
 
@@ -153,10 +137,12 @@ class QRPlatba
 	}
 
 
-	public function getQrCode()
+	/**
+	 * @return \GdImage|resource
+	 */
+	public function getQrCodeGd(int $size = self::DefaultSize)
 	{
-		// Min 150
-		$size = 200;
+		// Min $size ???
 		// Odhad
 		$minPixelSize = $size / 25;
 		$qrSize = ceil($size - 8 * $minPixelSize);
@@ -194,12 +180,21 @@ class QRPlatba
 		imagecopy($gdResult, $gdSizedFrame, 0, 0, 0, 0, $size, $size);
 		imagecopy($gdResult, $qdLabel, ceil(2 * $pixelSize), $size - 2, 0, 0, ceil(18 * $pixelSize), ceil(4 * $pixelSize + 2));
 
-		ob_start();
-		imagepng($gdResult);
-		$data = ob_get_clean();
+		return $gdResult;
+	}
 
-		$res = 'data:image/png;base64,' . base64_encode($data);
-		return $res;
+
+	public function getQrCodeString(int $size = self::DefaultSize): string
+	{
+		ob_start();
+		imagepng($this->getQrCodeGd($size));
+		return ob_get_clean();
+	}
+
+
+	public function getQrCodeUri(int $size = self::DefaultSize): string
+	{
+		return 'data:image/png;base64,' . base64_encode($this->getQrCodeString($size));
 	}
 
 
