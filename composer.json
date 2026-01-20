@@ -3,7 +3,7 @@
   "description": "PHP knihovna pro generování QR Platba dle standardu",
   "minimum-stability": "dev",
   "license": "MIT",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "type": "library",
   "authors": [
     {
