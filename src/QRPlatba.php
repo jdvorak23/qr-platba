@@ -142,7 +142,7 @@ class QRPlatba
 	 */
 	public function getQrCodeGd(int $size = self::DefaultSize)
 	{
-		// Min $size ???
+		// Min $size ??? + výjmiky
 		// Odhad
 		$minPixelSize = $size / 25;
 		$qrSize = ceil($size - 8 * $minPixelSize);
@@ -199,8 +199,10 @@ class QRPlatba
 
 
 	/**
-	 * @param string $iban
-	 * @param string|null $bic
+	 * Identifikace protistrany
+	 * Iban je jediná povinná položka vcelém SPAYD
+	 * @param string $iban povinný
+	 * @param string|null $bic nepovinný
 	 * @param bool $emptyStringAsNull
 	 * @return static
 	 */
@@ -216,6 +218,8 @@ class QRPlatba
 
 
 	/**
+	 * Seznam alternativních účtů k výchozímu účtu danému hodnotou ACC.
+	 * Max. 93 znaků celkem
 	 * @param string|null $iban
 	 * @param string|null $bic
 	 * @param bool $emptyStringAsNull
@@ -236,6 +240,8 @@ class QRPlatba
 
 
 	/**
+	 * Výše částky platby.
+	 * Max 9 999 999,99
 	 * @param float|null $amount
 	 * @param bool $autoRound
 	 * @param bool $zeroAsNull
@@ -259,7 +265,9 @@ class QRPlatba
 
 
 	/**
-	 * Je přednastavena hodnota 'CZK' todo
+	 * Měna platby.
+	 * Některé banky možná ignorují a mají CZK
+	 * CZK by měl být default, pokud není ve SPAYD uvedeno
 	 * @param string|null $currency
 	 * @param bool $emptyStringAsNull
 	 * @return static
@@ -275,7 +283,8 @@ class QRPlatba
 
 
 	/**
-	 * Ve specifikaci je definováno jako 'Celé číslo', ale int to být nemůže, to by mizely případné nuly na začátku
+	 * Identifikátor platby pro příjemce.
+	 * 0-9, max 16 znaků
 	 * @param string|null $payeeIdentifier
 	 * @param bool $emptyStringAsNull
 	 * @return static
@@ -291,6 +300,8 @@ class QRPlatba
 
 
 	/**
+	 * Jméno příjemce
+	 * Max. 35 znaků
 	 * @param string|null $payeeName
 	 * @param bool $emptyStringAsNull
 	 * @return static
@@ -306,6 +317,7 @@ class QRPlatba
 
 
 	/**
+	 * Datum splatnosti
 	 * @param \DateTime|null $dueDate
 	 * @return static
 	 */
@@ -317,6 +329,8 @@ class QRPlatba
 
 
 	/**
+	 * Typ platby
+	 * Hodnota „IP“ indikuje požadavek na provedení příkazu k úhradě formou okamžité platby, pokud je to v dané bance možné.
 	 * @param bool $paymentType
 	 * @return static
 	 */
@@ -328,6 +342,8 @@ class QRPlatba
 
 
 	/**
+	 * Zpráva pro příjemce
+	 * Max. 60 znaků
 	 * @param string|null $message
 	 * @param bool $emptyStringAsNull
 	 * @return static
@@ -343,8 +359,11 @@ class QRPlatba
 
 
 	/**
-	 * @param bool $isPhone
-	 * @param string|null $emailOrPhone
+	 * Identifikace kanálu pro zaslání notifikace výstavci platby.
+	 * Poznámka: odesílání notifikací se řídí podle podmínek jednotlicých bank, nicméně doporučuje se odesílat v okamžiku blokace prostředků na účtu plátce.
+	 * Nastavuje 'NT' a 'NTA' zároveň
+	 * @param bool $isPhone - 'NT'
+	 * @param string|null $emailOrPhone - 'NTA'
 	 * @param bool $emptyStringAsNull
 	 * @return static
 	 */
@@ -373,7 +392,9 @@ class QRPlatba
 
 
 	/**
-	 * @param int|null $repeatPayment 0-30, 0 nezkoušet
+	 * Počet dní, po které se má provádět pokus o opětovné provedení neúspěšné platby (z důvodů např. nedostupných prostředků na účtu příkazce)
+	 * číslo od 0 do 30
+	 * @param int|null $repeatPayment 0-30, 0 znamená nezkoušet
 	 * @return static
 	 */
 	public function setRepeatPayment(?int $repeatPayment = null)
@@ -384,6 +405,8 @@ class QRPlatba
 
 
 	/**
+	 * Variabilní symbol
+	 * 0-9, max 10 znaků
 	 * @param string|null $variableSymbol
 	 * @param bool $emptyStringAsNull
 	 * @return static
@@ -399,6 +422,8 @@ class QRPlatba
 
 
 	/**
+	 * Specifický symbol
+	 * 0-9, max 10 znaků
 	 * @param string|null $specificSymbol
 	 * @param bool $emptyStringAsNull
 	 * @return static
@@ -414,6 +439,8 @@ class QRPlatba
 
 
 	/**
+	 * Konstantní symbol
+	 * 0-9, max 10 znaků
 	 * @param string|null $constantSymbol
 	 * @param bool $emptyStringAsNull
 	 * @return $this
@@ -429,6 +456,9 @@ class QRPlatba
 
 
 	/**
+	 * Identifikátor platby na straně příkazce. Jedná se o interní ID, jehož použití a interpretace závisí na bance příkazce.
+	 * Může být použito například jako identifikace e‑commerce platby, nebo pro statistické či marketingové účely.
+	 * Max. 20 znaků
 	 * @param string|null $payerIdentifier
 	 * @param bool $emptyStringAsNull
 	 * @return static
@@ -444,6 +474,8 @@ class QRPlatba
 
 
 	/**
+	 * URL, které je možno využít pro vlastní potřebu
+	 * Max. 140 znaků
 	 * @param string|null $url
 	 * @param bool $emptyStringAsNull
 	 * @return static
@@ -456,4 +488,23 @@ class QRPlatba
 		$this->url->setValue($url);
 		return $this;
 	}
+
+
+	public function setFormat(Format $format): void
+	{
+		$this->format = $format;
+	}
+
+
+	public function setConvert(Convert $convert): void
+	{
+		$this->convert = $convert;
+	}
+
+
+	public function setTruncate(Truncate $truncate): void
+	{
+		$this->truncate = $truncate;
+	}
+
 }
