@@ -1,8 +1,8 @@
 <?php
 
-namespace Jdvorak23\QrFaktura\Helpers;
+namespace Jdvorak23\QrPlatba\Helpers;
 
-use Jdvorak23\QrFaktura\QRPlatba;
+use Jdvorak23\QrPlatba\QRPlatba;
 
 class Helper
 {

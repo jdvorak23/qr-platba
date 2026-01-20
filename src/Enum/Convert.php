@@ -1,6 +1,6 @@
 <?php
 
-namespace Jdvorak23\QrFaktura\Enum;
+namespace Jdvorak23\QrPlatba\Enum;
 
 abstract class Convert
 {

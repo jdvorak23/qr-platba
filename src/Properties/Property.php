@@ -1,12 +1,12 @@
 <?php
 
-namespace Jdvorak23\QrFaktura\Properties;
+namespace Jdvorak23\QrPlatba\Properties;
 
-use Jdvorak23\QrFaktura\Enum\Convert;
-use Jdvorak23\QrFaktura\Enum\Format;
-use Jdvorak23\QrFaktura\Enum\Truncate;
-use Jdvorak23\QrFaktura\Exceptions\QRFakturaException;
-use Jdvorak23\QrFaktura\Helpers\Helper;
+use Jdvorak23\QrPlatba\Enum\Convert;
+use Jdvorak23\QrPlatba\Enum\Format;
+use Jdvorak23\QrPlatba\Enum\Truncate;
+use Jdvorak23\QrPlatba\Exceptions\QRFakturaException;
+use Jdvorak23\QrPlatba\Helpers\Helper;
 
 class Property
 {

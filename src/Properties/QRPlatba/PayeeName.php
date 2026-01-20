@@ -1,8 +1,8 @@
 <?php
 
-namespace Jdvorak23\QrFaktura\Properties\QRPlatba;
+namespace Jdvorak23\QrPlatba\Properties\QRPlatba;
 
-use Jdvorak23\QrFaktura\Properties\SpaydProperty;
+use Jdvorak23\QrPlatba\Properties\SpaydProperty;
 
 class PayeeName extends SpaydProperty
 {

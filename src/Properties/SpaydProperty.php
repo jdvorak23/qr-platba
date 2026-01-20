@@ -1,6 +1,6 @@
 <?php
 
-namespace Jdvorak23\QrFaktura\Properties;
+namespace Jdvorak23\QrPlatba\Properties;
 
 abstract class SpaydProperty extends Property
 {

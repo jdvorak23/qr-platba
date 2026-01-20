@@ -19,7 +19,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Jdvorak23\\QrFaktura\\": "src/"
+      "Jdvorak23\\QrPlatba\\": "src/"
     }
   }
 }

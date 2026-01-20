@@ -1,12 +1,12 @@
 <?php
 
-namespace Jdvorak23\QrFaktura\Properties\QRPlatba;
+namespace Jdvorak23\QrPlatba\Properties\QRPlatba;
 
-use Jdvorak23\QrFaktura\Enum\Convert;
-use Jdvorak23\QrFaktura\Enum\Format;
-use Jdvorak23\QrFaktura\Enum\Truncate;
-use Jdvorak23\QrFaktura\Exceptions\QRFakturaException;
-use Jdvorak23\QrFaktura\Properties\SpaydProperty;
+use Jdvorak23\QrPlatba\Enum\Convert;
+use Jdvorak23\QrPlatba\Enum\Format;
+use Jdvorak23\QrPlatba\Enum\Truncate;
+use Jdvorak23\QrPlatba\Exceptions\QRFakturaException;
+use Jdvorak23\QrPlatba\Properties\SpaydProperty;
 
 class IbanBicAlts extends SpaydProperty
 {

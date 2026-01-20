@@ -1,6 +1,6 @@
 <?php
 
-namespace Jdvorak23\QrFaktura;
+namespace Jdvorak23\QrPlatba;
 
 use Endroid\QrCode\Encoding\Encoding;
 use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelMedium;
@@ -8,28 +8,28 @@ use Endroid\QrCode\QrCode;
 use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeShrink;
 use Endroid\QrCode\Writer\PngWriter;
 use Endroid\QrCode\Writer\Result\PngResult;
-use Jdvorak23\QrFaktura\Enum\Convert;
-use Jdvorak23\QrFaktura\Enum\Format;
-use Jdvorak23\QrFaktura\Enum\Truncate;
-use Jdvorak23\QrFaktura\Exceptions\QRFakturaException;
-use Jdvorak23\QrFaktura\Properties\QRPlatba\Amount;
-use Jdvorak23\QrFaktura\Properties\QRPlatba\ConstantSymbol;
-use Jdvorak23\QrFaktura\Properties\QRPlatba\Currency;
-use Jdvorak23\QrFaktura\Properties\QRPlatba\DueDate;
-use Jdvorak23\QrFaktura\Properties\QRPlatba\IbanBic;
-use Jdvorak23\QrFaktura\Properties\QRPlatba\IbanBicAlts;
-use Jdvorak23\QrFaktura\Properties\QRPlatba\Message;
-use Jdvorak23\QrFaktura\Properties\QRPlatba\NotificationId;
-use Jdvorak23\QrFaktura\Properties\QRPlatba\NotificationMethod;
-use Jdvorak23\QrFaktura\Properties\QRPlatba\PayeeIdentifier;
-use Jdvorak23\QrFaktura\Properties\QRPlatba\PayeeName;
-use Jdvorak23\QrFaktura\Properties\QRPlatba\PayerIdentifier;
-use Jdvorak23\QrFaktura\Properties\QRPlatba\PaymentType;
-use Jdvorak23\QrFaktura\Properties\QRPlatba\RepeatPayment;
-use Jdvorak23\QrFaktura\Properties\QRPlatba\SpecificSymbol;
-use Jdvorak23\QrFaktura\Properties\QRPlatba\Url;
-use Jdvorak23\QrFaktura\Properties\QRPlatba\VariableSymbol;
-use Jdvorak23\QrFaktura\Properties\SpaydProperty;
+use Jdvorak23\QrPlatba\Enum\Convert;
+use Jdvorak23\QrPlatba\Enum\Format;
+use Jdvorak23\QrPlatba\Enum\Truncate;
+use Jdvorak23\QrPlatba\Exceptions\QRFakturaException;
+use Jdvorak23\QrPlatba\Properties\QRPlatba\Amount;
+use Jdvorak23\QrPlatba\Properties\QRPlatba\ConstantSymbol;
+use Jdvorak23\QrPlatba\Properties\QRPlatba\Currency;
+use Jdvorak23\QrPlatba\Properties\QRPlatba\DueDate;
+use Jdvorak23\QrPlatba\Properties\QRPlatba\IbanBic;
+use Jdvorak23\QrPlatba\Properties\QRPlatba\IbanBicAlts;
+use Jdvorak23\QrPlatba\Properties\QRPlatba\Message;
+use Jdvorak23\QrPlatba\Properties\QRPlatba\NotificationId;
+use Jdvorak23\QrPlatba\Properties\QRPlatba\NotificationMethod;
+use Jdvorak23\QrPlatba\Properties\QRPlatba\PayeeIdentifier;
+use Jdvorak23\QrPlatba\Properties\QRPlatba\PayeeName;
+use Jdvorak23\QrPlatba\Properties\QRPlatba\PayerIdentifier;
+use Jdvorak23\QrPlatba\Properties\QRPlatba\PaymentType;
+use Jdvorak23\QrPlatba\Properties\QRPlatba\RepeatPayment;
+use Jdvorak23\QrPlatba\Properties\QRPlatba\SpecificSymbol;
+use Jdvorak23\QrPlatba\Properties\QRPlatba\Url;
+use Jdvorak23\QrPlatba\Properties\QRPlatba\VariableSymbol;
+use Jdvorak23\QrPlatba\Properties\SpaydProperty;
 
 class QRPlatba
 {
