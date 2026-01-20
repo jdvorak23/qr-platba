@@ -1,0 +1,25 @@
+{
+  "name": "jdvorak23/qr-faktura",
+  "description": "PHP knihovna pro generování QR Platba dle standardu",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "version": "1.0.0",
+  "type": "library",
+  "authors": [
+    {
+      "name": "dvorakj23",
+      "email": "dvorakj3@post.cz"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "endroid/qr-code": "^4",
+    "ext-mbstring": "*",
+    "ext-gd": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Jdvorak23\\QrFaktura\\": "src/"
+    }
+  }
+}
